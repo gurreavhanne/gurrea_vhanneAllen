@@ -52,7 +52,80 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `city`, `membership_lev
 (10, 'Julia', 'Cebu', 'Bronze', '2025-04-15');
 
 --
--- Indexes for dumped tables
+-- Query 1
+-- List all customers from Cebu.
+SELECT * 
+FROM customers
+WHERE city = 'Cebu';
+
+-- Query 2
+-- Find all Gold membership customers.
+SELECT * 
+FROM customers
+WHERE membership_level = 'Gold';
+
+-- Query 3
+-- List customers whose names start with “A” or “D”.
+SELECT * 
+FROM customers
+WHERE customer_name LIKE 'A%' OR customer_id LIKE 'D%';
+
+-- Query 4
+-- Find customers from Cebu who have Silver or Gold membership.
+SELECT *
+FROM customers
+WHERE city = 'Cebu'
+AND  (membership_level='Silver'OR membership_level='Gold');
+
+-- Query 5
+-- Select customers who joined between 2025-02-01 and 2025-03-31.
+SELECT *
+FROM customers
+WHERE join_date BETWEEN '2025-02-01' AND '2025-03-31';
+
+-- Query 6
+-- Find customers from either Bohol or Tagbilaran with Bronze membership.
+SELECT *
+FROM customers
+WHERE city IN ( 'Bohol','Tagbilaran')
+AND membership_level = 'Bronze';
+
+-- Query 7
+-- List all customers whose names contain the letter “a” (case-insensitive).
+SELECT *
+FROM customers
+WHERE customer_name LIKE '%a%';
+
+-- Query 8
+-- Find all customers from Cebu who are Gold members and joined before March 2025.
+SELECT *
+FROM customers
+WHERE city = 'Cebu' 
+AND membership_level = 'Gold' 
+AND join_date < '2025-03-01';
+
+-- Query 9
+-- List all customers from Bohol or Tagbilaran who joined on or before February 2025 and have Silver or Bronze membership.
+SELECT *
+FROM customers
+WHERE city IN ('Bohol','Tagbilaran')
+AND join_date <= '2025-02-28'
+AND membership_level IN ('Silver','Bronze');
+
+-- Query 10
+-- Select all customers except those whose customer_id is 1, 4, or 6, and who joined after February 2025.
+SELECT *
+FROM customers
+WHERE customer_id NOT IN (1,4,6)
+AND join_date > '2025-02-28';
+
+-- Query 11
+-- List customers who joined in April 2025, are from Cebu or Bohol, and are not Bronze members.
+SELECT *
+FROM customers
+WHERE join_date BETWEEN '2025-04-01' AND '2025-04-30'
+AND city IN ('Cebu','Bohol')
+AND membership_level <> 'Bronze';
 --
 
 --
